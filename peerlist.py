@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 redis = redis.Redis()
 
-@app.route('/api/set')
+@app.route('/api/setpeer')
 def write_redis():
     user_hash = request.args.get('hash')
     ip = request.args.get('ip')
@@ -17,10 +17,12 @@ def write_redis():
     
     return "OK"
 
-@app.route('/api/get')
+
+@app.route('/api/getpeer')
 def read_redis():
     user_hash = request.args.get('hash')
     return jsonify(redis.get(user_hash))
+
 
 if __name__ == "__main__":
     app.run()

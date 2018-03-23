@@ -13,8 +13,9 @@ def write_redis():
     print(tip)
     print(type(tip))
     print(request.args)
-    redis.set(user_hash, str(ip))
-    redis.set(user_hash, str(tip))
+    redis.set(user_hash, str(ip) + '/' + str(tip))
+    
+    return "OK"
 
 @app.route('/api/get')
 def read_redis():

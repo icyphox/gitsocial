@@ -9,8 +9,12 @@ redis = redis.Redis()
 def write_redis():
     user_hash = request.args.get('hash')
     ip = request.args.get('ip')
-    commit = request.args.get('tip')
-    redis.set(user_hash, set([ip, tip]))
+    tip = request.args.get('tip')
+    print(tip)
+    print(type(tip))
+    print(request.args)
+    redis.set(user_hash, str(ip))
+    redis.set(user_hash, str(tip))
 
 @app.route('/api/get')
 def read_redis():

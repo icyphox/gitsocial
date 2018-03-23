@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import redis
+
 app = Flask(__name__)
 
 redis = redis.Redis()
@@ -15,3 +16,6 @@ def write_redis():
 def read_redis():
     user_hash = request.args.get('hash')
     return jsonify(redis.get(user_hash))
+
+if __name__ == "__main__":
+    app.run()

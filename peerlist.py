@@ -21,7 +21,7 @@ def write_redis():
 @app.route('/api/get_peer')
 def read_redis():
     user_hash = request.args.get('hash')
-    return jsonify(redis.get(user_hash))
+    return redis.get(user_hash).decode('utf-8')
 
 
 if __name__ == "__main__":

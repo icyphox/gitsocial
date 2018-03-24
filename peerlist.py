@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, abort
 import redis
 
 app = Flask(__name__)
@@ -21,7 +21,11 @@ def write_redis():
 @app.route('/api/get_peer')
 def read_redis():
     user_hash = request.args.get('hash')
-    return redis.get(user_hash).decode('utf-8')
+    ret = redis.get(user_hash)
+    if not ret:
+        abort(404)
+    else:
+        return ret.decode('utf-8')
 
 
 if __name__ == "__main__":
